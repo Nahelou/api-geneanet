@@ -1,4 +1,4 @@
-# The rest API for the Geneanet webscraper en geocoder
+# The rest API for the Geneanet webscraper and geocoder
 
 Includes API Server utilities:
 
