@@ -5,40 +5,6 @@ const router = express.Router();
 
 const API_ADDRESS = "https://api-adresse.data.gouv.fr/search/?q=";
 
-function geocodingAddress(data) {
-    return new Promise(async function (res, rej) {
-        let geocodedData = [];
-        await data.forEach(el => {
-            let addToParam = '';
-            const add = el.address.split(' ');
-            for (let i = 0; i < add.length; i++) {
-                if (add[i] != '' && i != add.length - 1) {
-                    addToParam = addToParam + add[i] + '+'
-                } else if (i == add.length - 1) {
-                    addToParam = addToParam + add[i];
-                }
-            }
-            fetch(`${API_ADDRESS}${addToParam}`, {
-                    method: 'GET',
-                    mode: 'cors',
-                    cache: 'no-cache',
-                    credentials: 'same-origin',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                })
-                .then(response =>
-                    response.text()
-                )
-                .then(r => {
-                    geocodedData.push(r);
-                })
-        });
-
-        res(geocodedData);
-    })
-}
-
 function geocodeAddress(data) {
     let geocodedData = [];
     
@@ -77,6 +43,5 @@ function geocodeAddress(data) {
 }
 
 module.exports = {
-    geocodingAddress,
     geocodeAddress,
 };
